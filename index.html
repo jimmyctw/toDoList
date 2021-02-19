@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+        integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+        crossorigin="anonymous" />
+    <!-- main css -->
+    <link rel="stylesheet" href="/css/main.css">
+
+    <script defer type="module" src="/app.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div class="header-title">
+            <h1>Toady's Plan</h1>
+        </div>
+        <div class="control-btns" >
+            <button class="btnBig" id="resetBtn">NEW</button>
+            <button class="btnBig" id="endBtn">END</button>
+        </div>
+
+    </header>
+    <main>
+
+        <section class="todo" id="todo-sec">
+
+            <div class="todo-category">
+                <form >
+                    <label for="fname">Today's Tasks </label><br>
+                    <input type="text" id="categoryVal" placeholder="Input Task Category" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Input Task Category'" ><br>
+                    <button class="formBtn btnBig" type="button" id="categoryAddBtn"><i class="fas fa-plus"></i></button>
+                </form>              
+                <ul class="category-list" id="categoryList">
+                    <li class="list-item">
+                        <span>Language Learning</span>
+                        <div class="listBtn">
+                            <button><i class="fas fa-external-link-alt"></i></button>
+                            <button class="trash"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+
+
+            <div class="category-container">
+                <form>
+                    <label for="fname">Household </label><br>
+                    <input type="text" id="inputCategory" placeholder="Input Task Item" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Input Task Item'"><br>
+                    <button class="formBtn btnBig" type="button" id="itemAddBtn"><i class="fas fa-plus"></i></button>
+                </form>
+                <ul>
+                    <li>
+                        <span>Map floor</span>
+                        <div class="listBtn">
+                            <button class="trash"><i class="fas fa-trash-alt"></i></button>
+                            <button class="doneCheck"><i class="fas fa-check"></i></button>
+                        </div>
+                    </li>
+
+
+
+
+
+                </ul>
+
+            </div>
+
+
+        </section>
+
+
+        <section  class="result-sec" id="resultSec">
+
+            <div class="result-container" >
+
+                <div class="result-title">
+                    <h1>Done! <i class="far fa-thumbs-up"></i></h1>
+                </div>
+                <ul class="result-items" id="doneContainer">
+                    <li><i class="fas fa-check"></i> &nbsp; Listen english radio 30 min</li>
+
+                </ul>
+
+    
+ 
+            </div>
+            <div class="result-container">
+                <div class="result-title">
+                    <h1>Undone! <i class="far fa-thumbs-down"></i></h1>
+                </div>
+
+                <ul class="result-items" id="undoneContainer">
+                    <li><i class="fas fa-times"></i> &nbsp; Listen english radio 30 min</li>
+                </ul>
+            </div>
+            
+        </section>
+    </main>
+<footer>
+    <ul>
+        <li><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook"></i></a></li>
+        <li><a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram-square"></i></a></li>
+        <li><a href="https://jimmy2.netlify.app/#/" target="_blank"><i class="fas fa-envelope-square"></i></a></li>
+    </ul>
+    <span>All right reserved 2021</span>
+</footer>
+</body>
+</html>
