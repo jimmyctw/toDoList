@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/css/main.css">
 
     <script defer type="module" src="/app.js"></script>
-    <title>Document</title>
+    <title>To Do List</title>
 </head>
 <body>
     <header>
@@ -23,50 +23,45 @@
             <button class="btnBig" id="resetBtn">NEW</button>
             <button class="btnBig" id="endBtn">END</button>
         </div>
-
     </header>
     <main>
-
         <section class="todo" id="todo-sec">
+            <div class="todo-category container">
 
-            <div class="todo-category">
-                <form >
-                    <label for="fname">Today's Tasks </label><br>
-                    <input type="text" id="categoryVal" placeholder="Input Task Category" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Input Task Category'" ><br>
-                    <button class="formBtn btnBig" type="button" id="categoryAddBtn"><i class="fas fa-plus"></i></button>
-                </form>              
-                <ul class="category-list" id="categoryList">
+                <div class="container-header" id="categoryHeader">
+                    <label for="fname">Today's Tasks </label>
+                    <input type="text" id="categoryVal" placeholder="Input Task Category" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Input Task Category'" onkeydown="return event.key != 'Enter';" >
+                    <button class="formBtn btnBig" type="button" id="categoryBtn"><i class="fas fa-plus"></i></button> 
+                </div>
+
+                <ul class="category-list listContainer" id="categoryList">
                     <li class="list-item">
                         <span>Language Learning</span>
                         <div class="listBtn">
-                            <button><i class="fas fa-external-link-alt"></i></button>
-                            <button class="trash"><i class="fas fa-trash-alt"></i></button>
+                            <button class="trash btnC"><i class="fas fa-trash-alt"></i></button>
+                            <button class="open btnC"><i class="fas fa-external-link-alt"></i></button>
                         </div>
                     </li>
+
                 </ul>
             </div>
 
-
-
-            <div class="category-container">
-                <form>
-                    <label for="fname">Household </label><br>
-                    <input type="text" id="inputCategory" placeholder="Input Task Item" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Input Task Item'"><br>
+            <div class="category-container container">
+                
+                <div class="container-header">
+                    <label for="fname">Household </label>
+                    <input class="categoryInput" type="text" id="inputCategory" placeholder="Input Task Item" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Input Task Item'" onkeydown="return event.key != 'Enter';">
                     <button class="formBtn btnBig" type="button" id="itemAddBtn"><i class="fas fa-plus"></i></button>
-                </form>
-                <ul>
-                    <li>
-                        <span>Map floor</span>
+                </div>
+                
+                <ul class="list-container listContainer" >
+                    <li class="list-item">
+                        <span>Read 5 English articles</span>
                         <div class="listBtn">
                             <button class="trash"><i class="fas fa-trash-alt"></i></button>
                             <button class="doneCheck"><i class="fas fa-check"></i></button>
                         </div>
                     </li>
-
-
-
-
-
                 </ul>
 
             </div>
@@ -76,18 +71,15 @@
 
 
         <section  class="result-sec" id="resultSec">
-
             <div class="result-container" >
-
                 <div class="result-title">
                     <h1>Done! <i class="far fa-thumbs-up"></i></h1>
                 </div>
-                <ul class="result-items" id="doneContainer">
-                    <li><i class="fas fa-check"></i> &nbsp; Listen english radio 30 min</li>
-
+                <ul class="result-items listContainer" id="doneContainer">
+                    <li class="list-item"><i class="fas fa-check"></i> &nbsp; Listen english fsadf afafds radio 30 min</li>
+                    <li class="list-item"><i class="fas fa-check"></i> &nbsp; Listen english radio 30 min</li>
                 </ul>
 
-    
  
             </div>
             <div class="result-container">
@@ -95,8 +87,9 @@
                     <h1>Undone! <i class="far fa-thumbs-down"></i></h1>
                 </div>
 
-                <ul class="result-items" id="undoneContainer">
-                    <li><i class="fas fa-times"></i> &nbsp; Listen english radio 30 min</li>
+                <ul class="result-items listContainer" id="undoneContainer">
+                    <li class="list-item"><i class="fas fa-times"></i> &nbsp; Listen english radio safsf dasfsfa sfasf 30 min</li>
+                    <li class="list-item"><i class="fas fa-times"></i> &nbsp; Listen english radio 30 min</li>
                 </ul>
             </div>
             

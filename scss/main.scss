@@ -49,93 +49,80 @@ i{
     background-color: $clr-border;
 }
 
-
-
+.displayNone{
+    display: none;
+}
 
 //mixin
-@mixin ulStyle {
-    ul{
-        @include flexR;
-        justify-content: center;
-        li{
-            font-family: $font-info;
-        }
-        li:hover{
-            color: $clr-alert;
-        }
-    }
-}
-@mixin formStyle{
-    font-size: 2rem;
-    form{
-        padding: 1rem;
-        width: 100%;
-        font-family: $font-info;
+@mixin containerHeader {
+    .container-header{
+        @include flexC;
         position: relative;
-    }
-    input{
-        height: 2rem;
-        width: 10rem;
-        padding: .5rem;
-    }
-    input[type=text]{
-        background-color:$clr-bg;
-    }
-    .formBtn{
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
+        align-items: flex-start;
+        width: 100%;
+        font-size: 1.8rem;
+        font-family: $font-title;
+        padding: 1rem;
+        input[type=text]{
+            height: 2.5rem;
+            width: 10rem;
+            padding: .5rem;
+            margin: 1rem 0;
+            background-color:$clr-bg;
+        }
+        .formBtn{
+            position: absolute;
+            right: 1rem;
+            margin: 0;
+        }
     }
 }
-
 @mixin containerStyle{
+    min-width: 320px;
     background-color: rgba($clr-black, .6);
     border: 5px solid $clr-bg;
-    border-radius: 8%;
+    border-radius: 5%;
+
+    margin: 1rem .5rem;
+    justify-content: center;
     color: $clr-bg;
     box-shadow: 8px 12px 22px -5px rgba(37,38,39,1);
     -webkit-box-shadow: 8px 12px 22px -5px rgba(37,38,39,1);
     -moz-box-shadow: 8px 12px 22px -5px rgba(37,38,39,1);
-}
+    -webkit-animation:fade-in 1.2s cubic-bezier(.39,.575,.565,1.000) both;animation:fade-in 1.2s cubic-bezier(.39,.575,.565,1.000) both;
 
-@mixin listItem  {
-    li{
+}
+@mixin listContainer {
+    .listContainer{
+        @include flexC;
+        width: 100%;
+    }
+    .list-item{
         @include flexR;
-        justify-content: space-between;
         align-items: center;
         width: 100%;
         margin: .5rem 0;
         padding: 1rem;
         background-color: rgba($clr-black, .9);
-
-    }
-    span{
-        padding-right: 1rem;
-    }
-    .listBtn{
+        font-family: $font-art;
         button{
             width: 1.2rem;
             height: 1.2rem;
             margin: .5rem;
             background-color: transparent;
         }
+        i{
+            font-size: 1.2rem;
+            color: $clr-bg;
+        }
     }
-    i{
-        font-size: 1.2rem;
-        color: $clr-bg;
-    }
+    
 }
-
-
-
-
-
-
-
 header{
     @include flexR;
     align-items: center;
     justify-content: center;
+    font-family: $font-title;
     .header-title{
         padding: .5rem;
         margin: 1rem;
@@ -145,55 +132,39 @@ header{
         }
     }
 }
-
-
 main{
     @include flexC;
+    justify-content: center;
     section {
         @include flexR;
+        justify-content: center;
+        align-items: center;
+        width: 100%
     }
 }
-
+.container, .result-container{
+    @include containerStyle;
+    @include listContainer;
+    @include flexC;
+}
 .todo{
-    @include listItem;
-    justify-content: center;
     align-items: flex-start;
-    >div{
-        margin: 2rem;
-    }
 }
-
 
 .todo-category, .category-container{
-    @include flexC;
-    @include containerStyle;
-    @include formStyle;
-    min-width: 300px;
-    -webkit-animation:fade-in 1.2s cubic-bezier(.39,.575,.565,1.000) both;animation:fade-in 1.2s cubic-bezier(.39,.575,.565,1.000) both;
-}
-
-
-.result-sec{
-    @include flexR;
-    justify-content: center;
-    >div{
-        margin: 2rem;
-        min-width: 300px;
+    @include containerHeader;
+    .list-item{
+        justify-content: space-between;
+    }
+    span{
+        padding-right: .5rem;
     }
 }
-
 
 
 .result-container{
-    @include flexC;
-    @include containerStyle;
     justify-content: flex-start;
-    padding: 1rem;
-    -webkit-animation:fade-in 1.2s cubic-bezier(.39,.575,.565,1.000) both;animation:fade-in 1.2s cubic-bezier(.39,.575,.565,1.000) both;
 
-    ul>li{
-        font-size: 1rem;
-    }
 }
 #doneContainer{
     i{
@@ -205,30 +176,30 @@ main{
         color: $clr-alert;
     }
 }
-
 footer{
     @include flexC;
-    @include ulStyle;
     padding-top: 2rem;
     text-align: center;
     color: $clr-black;
     font-size: 2rem;
     ul{
-        margin-top: 1rem ;
+        margin-top: 1rem;
+        @include flexR;
     }
     li{
         margin: 0 2rem;
+        font-family: $font-art;
+    }
+    li:hover{
+        color: $clr-alert;
     }
     i{
         font-size: 3rem;
     }
-
     span{
-        margin: 0;
         padding: .5rem 0 1rem;
     }
 }
-
 @-webkit-keyframes color-change-2x{0%{background:#19dcea}100%{background:#b22cff}}@keyframes color-change-2x{0%{background:#19dcea}100%{background:#b22cff}}
 
 @-webkit-keyframes fade-in{0%{opacity:0}100%{opacity:1}}@keyframes fade-in{0%{opacity:0}100%{opacity:1}}
