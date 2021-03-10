@@ -25,36 +25,34 @@
         </div>
     </header>
     <main>
-        <section class="todo" id="todo-sec">
+        <section class="todo" id="todo">
             <div class="todo-category container">
-
                 <div class="container-header" id="categoryHeader">
-                    <label for="fname">Today's Tasks </label>
+                    <h1>Today's Tasks </h1>
                     <input type="text" id="categoryVal" placeholder="Input Task Category" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Input Task Category'" onkeydown="return event.key != 'Enter';" >
-                    <button class="formBtn btnBig" type="button" id="categoryBtn"><i class="fas fa-plus"></i></button> 
+                    <button class="formBtn btnBig" type="submit" id="taskAddBtn"><i class="fas fa-plus"></i></button> 
                 </div>
 
                 <ul class="category-list listContainer" id="categoryList">
-                    <li class="list-item">
-                        <span>Language Learning</span>
+                    <!-- <li class="list-item category-list">
+                        <h1>Language Learning</h1>
                         <div class="listBtn">
                             <button class="trash btnC"><i class="fas fa-trash-alt"></i></button>
                             <button class="open btnC"><i class="fas fa-external-link-alt"></i></button>
                         </div>
-                    </li>
+                    </li> -->
 
                 </ul>
             </div>
 
-            <div class="category-container container">
-                
-                <div class="container-header">
-                    <label for="fname">Household </label>
-                    <input class="categoryInput" type="text" id="inputCategory" placeholder="Input Task Item" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Input Task Item'" onkeydown="return event.key != 'Enter';">
-                    <button class="formBtn btnBig" type="button" id="itemAddBtn"><i class="fas fa-plus"></i></button>
+            <div class="category-container container" id="container">
+                <div class="container-header" id="containerHeader">
+                    <h1>Household </h1>
+                    <input class="categoryInput" type="text" id="itemInput" placeholder="Input Task Item" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Input Task Item'" onkeydown="return event.key != 'Enter';">
+                    <button class="formBtn btnBig" type="submit" id="itemAddBtn"><i class="fas fa-plus"></i></button>
                 </div>
                 
-                <ul class="list-container listContainer" >
+                <ul class="list-container listContainer" id="itemList">
                     <li class="list-item">
                         <span>Read 5 English articles</span>
                         <div class="listBtn">
@@ -72,24 +70,24 @@
 
         <section  class="result-sec" id="resultSec">
             <div class="result-container" >
-                <div class="result-title">
+                <div class="result-title container-header">
                     <h1>Done! <i class="far fa-thumbs-up"></i></h1>
                 </div>
                 <ul class="result-items listContainer" id="doneContainer">
-                    <li class="list-item"><i class="fas fa-check"></i> &nbsp; Listen english fsadf afafds radio 30 min</li>
                     <li class="list-item"><i class="fas fa-check"></i> &nbsp; Listen english radio 30 min</li>
+                    <li class="list-item"><i class="fas fa-check"></i> &nbsp; Read 3 CNN news coverages</li>
                 </ul>
 
  
             </div>
             <div class="result-container">
-                <div class="result-title">
+                <div class="result-title container-header">
                     <h1>Undone! <i class="far fa-thumbs-down"></i></h1>
                 </div>
 
                 <ul class="result-items listContainer" id="undoneContainer">
-                    <li class="list-item"><i class="fas fa-times"></i> &nbsp; Listen english radio safsf dasfsfa sfasf 30 min</li>
-                    <li class="list-item"><i class="fas fa-times"></i> &nbsp; Listen english radio 30 min</li>
+                    <li class="list-item"><i class="fas fa-times"></i> &nbsp; Walk dog</li>
+                    <li class="list-item"><i class="fas fa-times"></i> &nbsp; Go jogging</li>
                 </ul>
             </div>
             

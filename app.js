@@ -1,174 +1,142 @@
-//header Section
-const resetBtn = document.getElementById('resetBtn');
-const endBtn = document.getElementById('endBtn');
-
-//main Section
-//main Section--Category
-const categoryList = document.getElementById('categoryList');
-const formBtns = document.getElementsByClassName('formBtn')
-const categoryContainers = document.getElementsByClassName('category-container');
-let categoryListItems = [];
-let AllListItems = [];
-
-let categorybtns = document.getElementsByClassName('btnC')
-
-
-resetBtn.addEventListener('click', init)
-
-for( let i = 0 ; i < formBtns.length; i++ ){
-    const formBtn = formBtns[i];
-    formBtn.addEventListener('click', e => 
-        e.stopPropagation(
-        chooseContainer(formBtn)
-    ))
+class ItemTask{
+    constructor (itemTaskText){
+        this.itemId = Date.now().toString();
+        this.itemTaskText = itemTaskText;
+        this.itemStatus = false;
+    }
 }
-
-for (let i = 0; i < categorybtns.length; i++){
-    const categorybtn = categorybtns[i];
-    categorybtn.addEventListener('click', e =>
-        e.stopPropagation(
-            btnFunction(categorybtn)
-        )
-    )
+class Category{
+    constructor( categoryVal ){
+        this.id = Date.now().toString();
+        this.categoryVal = categoryVal;
+        this.categoryContainer = []
+    }
+    static createCategoryContainer(categoryVal){
+        container.style.display = 'flex';
+        const categoryTitle =  document.getElementById("containerHeader").firstElementChild;
+        categoryTitle.innerHTML = categoryVal;
+    }
 }
+class UI{
+    static displayCategory(){
+        const Categories = Store.getCategory();
+        Categories.forEach((category) => UI.addCategoryToList(category))
+    }
 
-function btnFunction(categorybtn){
-    categorybtn.addEventListener('click', ()=>{
-
-        if(categorybtn.classList.contains('trash')){
-            trashRemove(categorybtn)
-        }else if(categorybtn.classList.contains('open')){
-            openCategory(categorybtn)
+    static addCategoryToList(category){
+        const categoryList = document.getElementById('categoryList');
+        const categoryItem = document.createElement('li');
+        const categoryBtns = `
+            <div class="listBtn">
+                <button class="trash btnC"><i class="fas fa-trash-alt"></i></button>
+                <button class="open btnC"><i class="fas fa-external-link-alt"></i></button>
+            </div>`
+        categoryItem.setAttribute("class", "list-item category-list") 
+        categoryItem.innerHTML = `
+            <h1>${category.categoryVal}</h1>
+            ${categoryBtns}`
+        categoryList.appendChild(categoryItem);
+    }
+    static deleteCategory(el){
+        if(el.classList.contains('trash')){
+            el.parentElement.parentElement.remove()
         }
-    })
+    }
+    static openCategory(el){
+        if(el.classList.contains('open')){
+            const categoryVal = el.parentElement.previousElementSibling.innerHTML;
+            console.log(categoryVal)
+            // Category.createCategoryContainer(categoryVal)
+        }
+    }
+    static clearFields(){
+        document.getElementById("categoryVal").value = '';
+    }
 }
 
-
-// function getTrashBtns (){
-//     trashBtns = document.getElementsByClassName('trash')
-//     for (let i = 0; i < trashBtns.length; i++){
-//         const trashBtn = trashBtns[i];
-//         trashBtn.addEventListener('click', e =>
-//             e.stopPropagation(
-//                 trashRemove(trashBtn)
-//             )
-//         )
-//     }
-// }
-
-function getAllBtns(){
-    console.log('trila')
-    let categorybtns = document.getElementsByClassName('btnC');
-    for (let i = 0; i < categorybtns.length; i++){
-        const categorybtn = categorybtns[i];
-        categorybtn.addEventListener('click', 
-            // e.stopPropagation(
-                btnFunction(categorybtn)
-            // )
-        )
+class Store {
+    static getCategory(){
+        let categories;
+        if( localStorage.getItem('categories') === null){
+            categories = []
+        }else{
+            categories = JSON.parse(localStorage.getItem('categories'))
+        }
+        return categories;
+    }
+    static addCategory(category){
+        const categories = Store.getCategory();
+        categories.push(category);
+        localStorage.setItem('categories', JSON.stringify(categories))
+    }
+    static removeCategory(category){
+        const categories = Store.getCategory();
+        categories.forEach((category, index) => {
+            if(category.categoryVal === category ){
+                categories.splice( index, 1)
+            }
+        })
+    localStorage.setItem('categories', JSON.stringify(categories))
     }
 }
 
 
-function openCategory(openBtn){
-    const categoryTitle = openBtn.parentNode.previousElementSibling.innerHTML;
-    console.log(categoryTitle)
-}
 
 
-//FUNCTION STARTS   ----------------------------------------------------------------
-function init(){
+//EVENT: Display Books
+document.addEventListener('DOMContentLoaded', UI.displayCategory);
+
+//Event: New Start
+document.getElementById('resetBtn').addEventListener('click', (e)=>{
+    const categoryList = document.getElementById('categoryList')
+    const container = document.getElementById('container')
+    const doneContainer = document.getElementById('doneContainer');
+    const undoneContainer = document.getElementById('undoneContainer');
     categoryList.innerHTML = '';
-    categoryListItems = [];
-    while ( categoryContainers.length > 0){
-        categoryContainers[0].parentNode.removeChild(categoryContainers[0]);
-    }
+    container.style.display = 'none';
     doneContainer.innerHTML = '';
     undoneContainer.innerHTML = '';
-}
-function trashRemove(trashBtn){
-    trashBtn.parentNode.parentNode.remove();
-}
-//----------------------------------------------------------------FUNCTION ENDS
-function chooseContainer(formBtn){
-    const formBtnId = formBtn.id;
-    const input = formBtn.previousElementSibling;
-    const inputValue = formBtn.previousElementSibling.value;
-    const categoryBtns = `                        
-        <button class="trash"><i class="fas fa-trash-alt"></i></button>
-        <button><i class="fas fa-external-link-alt"></i></button>`;
-    const itemBtn = `
-        <button class="trash"><i class="fas fa-trash-alt"></i></button>
-        <button class="doneCheck"><i class="fas fa-check"></i></button>`
-    
-    if( formBtnId === 'categoryBtn'){
-        listBuild( formBtn, categoryBtns, inputValue)
-        categoryListItems.push(inputValue)
-        console.log(categoryListItems)
-    }else{
-        listContainerBuild(formBtnId)
-        listBuild(formBtn, itemBtn, inputValue)
+    localStorage.clear();
+})
+
+
+
+//EVENT: Add Category
+document.getElementById('taskAddBtn').addEventListener('click', (e)=>{ 
+    const categoryVal = document.getElementById('categoryVal').value;
+    if( categoryVal !== '' ){
+        const category = new Category(categoryVal);    
+        UI.addCategoryToList(category)
+        Store.addCategory(category)
+        UI.clearFields();
     }
-    input.value = '';
-    getAllBtns()
-    
-}
-
-function categoryContainerBuild(value){
-    const categoryValue = value;
-    const categoryBox = document.createElement('div');
-    categoryBox.setAttribute('class', 'category-container');
-    categoryBox.setAttribute('id', categoryValue);
-    const formSec = `
-        <form>
-            <label for="fname">Household </label>            
-            <input class="categoryInput" type="text" id="inputCategory" placeholder="Input Task Item" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Input Task Item'">
-            <button class="formBtn btnBig" type="button" id="itemAddBtn"><i class="fas fa-plus"></i></button>
-        </form>`;
-    const categorySec = `<ul class="list-container"></ul>`;
-    categoryBox.innerHTML = formSec + categorySec;
-}
-
-function listContainerBuild (formBtnId){
-    const listContainer = document.createElement('ul');
-    const listContainerId = `${categoryName}Contanier`
-    listContainer.setAttribute('class', 'list-container');
-    listContainer.setAttribute('id', listContainerId);
-
-}
-
-
-function listBuild (formBtn, buttonSets, inputValue){
-    if( inputValue !== ''){
-        const listContainer = formBtn.parentNode.nextElementSibling;
-        const listItem =  document.createElement("li");
-        listItem.classList.add('list-item');
-        const listContent = `
-                <span>${inputValue}</span>
-                <div class="listBtn">${buttonSets}
-                </div>`
-        listItem.innerHTML = listContent;
-        appendItem(listItem, listContainer)
-    }
-}
+});
 
 
 
-function appendItem (item, container){
-    container.appendChild(item);
-}
+document.querySelector('.category-list').addEventListener('click', (e)=>{
+    //Delete Category
+    UI.deleteCategory(e.target)
+
+    //Open Category
+    UI.openCategory(e.target)
+
+    //Remove Category from Store
+    // Store.removeCategory(e.target.parentElement.parentElement.textContent)
+})
 
 
-//EVENTLISTENER STARTS----------------------------------------------------------------
 
-// categoryAddBtn.addEventListener('click',  addItem(categoryAddBtn))
-// itemAddBtn.addEventListener('click',  addItem(itemAddBtn))
-
-//----------------------------------------------------------------EVENTLISTENER ENDS
+//EVENT: End and Calculate
 
 
 
 
-//result Section
-const doneContainer = document.getElementById('doneContainer');
-const undoneContainer = document.getElementById('undoneContainer');
+
+
+
+
+
+
+
+
